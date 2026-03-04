@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.mjs",
-    "start": "node index.mjs"
-  },
+  "dev": "nodemon index.mjs",
+  "start": "node index.mjs",
+  "exe1": "node exe1/index.mjs"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
