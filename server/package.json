@@ -7,7 +7,8 @@
     "dev": "nodemon index.mjs",
     "start": "node index.mjs",
     "exe1": "node exe1/index.mjs",
-    "lab": "node lab/index.mjs"
+    "lab": "node lab/index.mjs",
+    "lab2": "node lab2/index.mjs"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +17,8 @@
   "dependencies": {
     "cors": "^2.8.6",
     "dayjs": "^1.11.19",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
