@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllFilms, getFavoriteFilms } from './FilmLibrary.mjs';
+import { getAllFilms, getFavoriteFilms,getWatchedToday } from './FilmLibrary.mjs';
 
 const app = express();
 const PORT = 3001;
@@ -16,6 +16,12 @@ app.get('/api/favorite' ,(req,res)=> {
   getFavoriteFilms()
         .then ((favFilms)=>res.json(favFilms))
         .catch (err =>res.status(500).json(err))
+})
+app.get ('/api/watchedtoday',(req,res)=> {
+  getWatchedToday()
+        .then ((watchToday)=>res.json(watchToday))
+        .catch(err =>res.status(500).json(err))
+
 })
 
 app.listen(PORT, ()=>{

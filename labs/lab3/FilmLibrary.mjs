@@ -68,7 +68,7 @@ function getWatchedToday (){
             row.id ,
             row.title ,
             row.favorite ,
-            row.watchDate ,
+            row.watchdate ,
             row.rating ,
             row.user
         ))
