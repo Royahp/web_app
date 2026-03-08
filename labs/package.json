@@ -8,8 +8,9 @@
     "start": "node index.mjs",
     "exe1": "node exe1/index.mjs",
     "lab": "node lab/index.mjs",
-   "lab2": "node lab2/index.mjs",
-   "setup-lab2": "node lab2/setup.mjs"
+    "lab2": "node lab2/index.mjs",
+    "setup-lab2": "node lab2/setup.mjs",
+    "lab3": "node lab3/index.mjs"
   },
   "keywords": [],
   "author": "",
