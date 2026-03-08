@@ -120,11 +120,36 @@ function getGreaterRank (){
      })
     })
 }
+
+function getNotWatched(){
+  return new Promise((resolve,reject)=>{
+
+    const sql = "SELECT * FROM films WHERE watchdate IS NULL"
+
+    db.all(sql,[],(err,rows)=>{
+
+      if(err){
+        reject(err)
+        return
+      }
+
+      const notwatched = rows.map(row => new Film(
+        row.id,
+        row.title,
+        Boolean(row.favorite),
+        row.watchdate,
+        row.rating,
+        row.user
+      ))
+
+      resolve(notwatched)
+
+    })
+  })
+}
 function closeDB() {
   db.close();
 }
 
 
-
-
-export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,closeDB };
+export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,closeDB };
