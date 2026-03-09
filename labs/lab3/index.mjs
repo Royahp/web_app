@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllFilms, getFavoriteFilms,getWatchedToday ,getGreaterRank,getNotWatched} from './FilmLibrary.mjs';
+import { getAllFilms, getFavoriteFilms,getWatchedToday ,getGreaterRank,getNotWatched, getFilmbyId} from './FilmLibrary.mjs';
 
 const app = express();
 const PORT = 3001;
@@ -35,7 +35,12 @@ app.get('/api/notwatched',(req,res)=>{
             .then ((notwatchedmovies)=> res.json(notwatchedmovies))
             .catch(err => res.status(500).json(err))
 })
-
+app.get('/api/films/:id',(req,res)=>{
+    const id = req.params.id
+    getFilmbyId (id)
+            .then((speId)=> res.json(speId))
+            .catch(err =>res.status(500).json(err))
+})
 app.listen(PORT, ()=>{
     console.log(`Server running on http://localhost:${PORT}`);
 });

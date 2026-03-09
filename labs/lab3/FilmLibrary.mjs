@@ -147,9 +147,30 @@ function getNotWatched(){
     })
   })
 }
+function getFilmbyId(id){
+    return new Promise ((resolve,reject)=>{
+        const sql ='SELECT * FROM films WHERE id=?'
+        db.get(sql,[id],(err,row)=>{
+            if (err){
+                reject (err)
+                return
+            }
+            const specificId = new Film(
+                row.id,
+                row.title,
+                Boolean(row.favorite),
+                row.watchdate,
+                row.rating,
+                row.user
+            
+            )
+            resolve (specificId)
+        })
+    })
+}
 function closeDB() {
   db.close();
 }
 
 
-export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,closeDB };
+export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,closeDB };
