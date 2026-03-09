@@ -2,7 +2,7 @@ import sqlite3 from 'sqlite3';
 import Film from './Films.mjs';
 import dayjs from 'dayjs'
 
-const db = new sqlite3.Database('./lab2/films.db', (err) => {
+const db = new sqlite3.Database('./lab3/films.db', (err) => {
   if (err) {
     console.error('Cannot open DB:', err.message);
   }
@@ -168,9 +168,40 @@ function getFilmbyId(id){
         })
     })
 }
+function createFilm(film){
+  return new Promise((resolve, reject) => {
+
+    const sql = `
+      INSERT INTO films(title, favorite, watchdate, rating, user)
+      VALUES(?,?,?,?,?)
+    `
+
+    db.run(
+      sql,
+      [
+        film.title,
+        film.favorite,
+        film.watchdate,
+        film.rating,
+        1
+      ],
+      function(err){
+
+        if(err){
+          reject(err)
+          return
+        }
+
+        resolve(this.lastID)
+
+      }
+    )
+
+  })
+}
 function closeDB() {
   db.close();
 }
 
 
-export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,closeDB };
+export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,closeDB };
