@@ -240,7 +240,30 @@ function updateRating(id,rating){
     })
    
 }
+function updateFav(id,favorite){
 
+  return new Promise((resolve,reject)=>{
+
+    const sql = `
+      UPDATE films
+      SET favorite=?
+      WHERE id=?
+    `
+
+    db.run(sql,[favorite,id],function(err){
+
+      if(err){
+        reject(err)
+        return
+      }
+
+      resolve(this.changes)
+
+    })
+
+  })
+
+}
 
 
 
@@ -249,4 +272,4 @@ function closeDB() {
 }
 
 
-export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,updateFilm,updateRating,closeDB };
+export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,updateFilm,updateRating,updateFav,closeDB };
