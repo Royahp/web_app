@@ -23,7 +23,7 @@ function getAllFilms(){
                 row.id ,
                 row.title ,
                 Boolean(row.favorite),
-                row.watchDate,
+                row.watchdate,
                 row.rating,
                 row.user
             ))
@@ -45,7 +45,7 @@ function getFavoriteFilms (){
                 row.id ,
                 row.title ,
                  Boolean(row.favorite),
-                row.watchDate ,
+                row.watchdate ,
                 row.rating ,
                 row.user
             ))
@@ -199,9 +199,38 @@ function createFilm(film){
 
   })
 }
+function updateFilm(id,film){
+    return new Promise ((resolve,reject)=>{
+    const sql =`UPDATE films
+                SET title =?,favorite=?,watchdate=?,rating=?,user=?
+                 WHERE id=?`
+                 console.log(film)
+console.log(id)
+    db.run(sql,[film.title ,
+                film.favorite ,
+                film.watchdate,
+                film.rating,
+                film.user,
+                id
+            ],
+                
+           function(err){
+            if (err) {
+                reject(err)
+                return
+            }
+            resolve(this.changes)
+           } )
+
+    })
+}
+
+
+
+
 function closeDB() {
   db.close();
 }
 
 
-export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,closeDB };
+export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,updateFilm,closeDB };

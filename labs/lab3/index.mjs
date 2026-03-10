@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllFilms, getFavoriteFilms,getWatchedToday ,getGreaterRank,getNotWatched, getFilmbyId,createFilm} from './FilmLibrary.mjs';
+import { getAllFilms, getFavoriteFilms,getWatchedToday ,getGreaterRank,getNotWatched, getFilmbyId,createFilm,updateFilm} from './FilmLibrary.mjs';
 
 
 const app = express();
@@ -50,6 +50,13 @@ app.post('/api/films/insert',(req,res)=>{
     .then(id => res.status(201).json({id:id}))
     .catch(err => res.status(500).json(err))
 
+})
+app.put('/api/films/update/:id',(req,res)=>{
+    const id=req.params.id
+    const film =req.body
+    updateFilm(id,film)
+        .then(id => res.status(200).json({message:"updated"}))
+        .catch(err => res.status(500).json(err))
 })
 
 app.listen(PORT, ()=>{
