@@ -224,6 +224,22 @@ console.log(id)
 
     })
 }
+function updateRating(id,rating){
+    return new Promise ((resolve,reject) =>{
+        const sql =`UPDATE films
+                    SET rating=?
+                    WHERE id=?  `
+         db.run(sql,[rating,id],
+            function(err){
+            if (err){
+                reject (err)
+                return
+            }
+            resolve(this.changes)
+         })
+    })
+   
+}
 
 
 
@@ -233,4 +249,4 @@ function closeDB() {
 }
 
 
-export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,updateFilm,closeDB };
+export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,updateFilm,updateRating,closeDB };
