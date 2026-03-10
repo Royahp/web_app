@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllFilms, getFavoriteFilms,getWatchedToday ,getGreaterRank,getNotWatched, getFilmbyId,createFilm,updateFilm,updateRating,updateFav} from './FilmLibrary.mjs';
+import { getAllFilms, getFavoriteFilms,getWatchedToday ,getGreaterRank,getNotWatched, getFilmbyId,createFilm,updateFilm,updateRating,updateFav,deleteFilm} from './FilmLibrary.mjs';
 
 
 const app = express();
@@ -76,6 +76,16 @@ app.put('/api/films/updatefav/:id',(req,res)=>{
     .catch(err => res.status(500).json(err))
 
 })
+app.delete('/api/films/delete/:id',(req,res)=>{
+    const id = req.params.id
+    deleteFilm(id)
+     deleteFilm(id)
+    .then(() => res.status(200).json({message:"deleted"}))
+    .catch(err => res.status(500).json(err))
+
+})
+       
+
 app.listen(PORT, ()=>{
     console.log(`Server running on http://localhost:${PORT}`);
 });

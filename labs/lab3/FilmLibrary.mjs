@@ -264,7 +264,19 @@ function updateFav(id,favorite){
   })
 
 }
-
+function deleteFilm(id){
+    return new Promise((resolve,reject)=>{
+        const sql=`DELETE FROM films where id=?`
+        db.run(sql,[id],function(err){
+            if (err){
+                reject (err)
+                return
+            }
+            resolve(this.changes)
+            
+        })
+    })
+}
 
 
 function closeDB() {
@@ -272,4 +284,4 @@ function closeDB() {
 }
 
 
-export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,updateFilm,updateRating,updateFav,closeDB };
+export { getAllFilms, getFavoriteFilms,getWatchedToday ,getEarlierDate,getGreaterRank,getNotWatched,getFilmbyId,createFilm,updateFilm,updateRating,updateFav,deleteFilm,closeDB };
