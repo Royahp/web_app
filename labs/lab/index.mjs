@@ -52,9 +52,12 @@ const lib = new Library()
 lib.addFilm(f1);
 lib.addFilm(f2);
 lib.addFilm(f3);
-//console.log(lib)
+console.log(lib)
 lib.sortByDate();
+console.log(lib)
 lib.sortByRafting();
+console.log(lib)
 lib.deleteFilm(2);
+console.log(lib)
 lib.updateRating (3,4)
 lib.print();
