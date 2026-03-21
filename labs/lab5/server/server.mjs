@@ -1,19 +1,18 @@
 import express from 'express';
 import sqlite3 from 'sqlite3';
+import { getAllFilms } from './FilmLibrary.mjs';
 
 const app = express();
-const db = new sqlite3.Database('./films.db');
+const PORT = 3001;
 
-app.get('/films', (req, res) => {
-    db.all('SELECT * FROM films', [], (err, rows) => {
-        if (err) {
-            res.status(500).json(err);
-        } else {
-            res.json(rows);
-        }
-    });
+app.use(express.json());
+app.listen(PORT, ()=>{
+    console.log(`Server running on http://localhost:${PORT}`);
 });
 
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
-}); 
+
+app.get ('/api/films',(req,res) =>{
+    getAllFilms()
+       .then((films)=>res.json(films))
+       .catch(err => res.status(500).json(err))
+})

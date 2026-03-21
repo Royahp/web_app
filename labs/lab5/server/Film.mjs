@@ -8,4 +8,4 @@ function Film(id,title,favorite =false,watchDate =null,rating=null,userId){
     this.userId = userId
 
 }
-export default {Film}
+export default Film
