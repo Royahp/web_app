@@ -46,5 +46,25 @@ function getFavorite (){
 
     })
 }
+function getBestRate(){
+    return new Promise ((resolve,reject)=>{
+        const sql = "SELECT * FROM films WHERE rating =?"
+        db.all (sql,[5],(err,rows) =>{
+            if(err){
+                reject(err)
+                return
+            }
+            const bestRateFilms = rows.map (row => new Film (
+                row.id ,
+                row.title ,
+                Boolean (row.favorite) ,
+                row.watchDate ,
+                row.rating ,
+                row.userId
+            ))
+        resolve (bestRateFilms)
+        })
+    })
+}
 
-export {getAllFilms,getFavorite}
+export {getAllFilms,getFavorite,getBestRate}
