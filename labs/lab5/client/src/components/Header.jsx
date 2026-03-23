@@ -7,7 +7,7 @@ import React from 'react';
     <Row>
         <Col md={4}>Library</Col>
         <Col md={4}><input placeholder="search.."/></Col>
-        <Col md={4}>log</Col>
+        <Col md={4}>log in</Col>
     </Row>
 </Container>)
  }
