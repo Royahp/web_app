@@ -11,3 +11,4 @@ function FilmList(props) {
     </ListGroup>
   );
 }
+export default FilmList
