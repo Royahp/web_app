@@ -1,6 +1,9 @@
 import { Button, ListGroup } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { useState } from "react";
+
 function FilmList(props) {
+  const [title, setTitle] = useState("");
   return (
     <>
       <table>
@@ -28,6 +31,16 @@ function FilmList(props) {
           ))}
         </tbody>
       </table>
+      <div>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="film title"
+        />
+        <Button onClick={() => props.onAdd(title)}>
+          <i className="bi bi-file-plus"></i>
+        </Button>
+      </div>
     </>
   );
 }

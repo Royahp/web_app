@@ -32,15 +32,24 @@ function App() {
   const deleteFilm = (id) => {
     setVisibleFilms((prev) => prev.filter((f) => f.id !== id));
   };
-  const addFilm = () => {
-    setVisibleFilms;
+  const addFilm = (titleFromUser) => {
+    const newFilm = {
+      id: Date.now(),
+      title: titleFromUser,
+      favorite: 0,
+      watchdate: "",
+      rate: 0,
+    };
+
+    setAllFilms((prev) => [...prev, newFilm]);
+    setVisibleFilms((prev) => [...prev, newFilm]);
   };
 
   return (
     <>
       <Header />
       <Filter onFilter={filterFilms} />
-      <FilmList films={visibleFilms} onDelete={deleteFilm} />
+      <FilmList films={visibleFilms} onDelete={deleteFilm} onAdd={addFilm} />
     </>
   );
 }
