@@ -1,4 +1,4 @@
-import { ListGroup } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 import PropTypes from "prop-types";
 function FilmList(props) {
   return (
@@ -19,6 +19,11 @@ function FilmList(props) {
               <td>{film.favorite ? "yes" : "no"}</td>
               <td>{film.watchdate}</td>
               <td>{film.rate}</td>
+              <td>
+                <Button onClick={() => props.onDelete(film.id)}>
+                  <i className="bi bi-trash" />
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>

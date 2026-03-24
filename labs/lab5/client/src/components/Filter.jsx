@@ -7,6 +7,7 @@ function Filter(props) {
     <div>
       <Button onClick={() => props.onFilter("all")}>All</Button>
       <Button onClick={() => props.onFilter("favorite")}>Favorite</Button>
+      <Button onClick={() => props.onFilter("rate")}>Rate</Button>
     </div>
   );
 }
