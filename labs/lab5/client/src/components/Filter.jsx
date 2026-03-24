@@ -1,6 +1,13 @@
 import { Fragment } from "react";
-function Filter() {
-  const cities = ["Teh", "Rasht", "Shiraz"];
-  return <></>;
+
+import { Button } from "react-bootstrap";
+
+function Filter(props) {
+  return (
+    <div>
+      <Button onClick={() => props.onFilter("all")}>All</Button>
+      <Button onClick={() => props.onFilter("favorite")}>Favorite</Button>
+    </div>
+  );
 }
 export default Filter;
