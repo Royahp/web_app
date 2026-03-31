@@ -17,9 +17,11 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "cors": "^2.8.6",
     "dayjs": "^1.11.19",
     "express": "^5.2.1",
+    "react-bootstrap": "^2.10.10",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {

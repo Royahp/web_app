@@ -8,7 +8,7 @@ function Header(props) {
         <Col md={4}>
           <input placeholder="search..."></input>
         </Col>
-        <col md={4}>log in</col>
+        <Col md={4}>log in</Col>
       </Row>
     </Container>
   );
