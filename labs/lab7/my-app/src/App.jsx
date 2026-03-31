@@ -5,6 +5,8 @@ import heroImg from "./assets/hero.png";
 import "./App.css";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
+import FormFilm from "./components/FormFilm";
+import { Container, Col, Row } from "react-bootstrap";
 
 function App() {
   useEffect(() => {
@@ -23,11 +25,25 @@ function App() {
     if (filterName == "all") {
       setVisibleFilms(allFilms);
     }
+    if (filterName == "fav") {
+      setVisibleFilms(allFilms.filter((f) => f.favorite === 1));
+    }
   };
   return (
     <>
-      <Header></Header>
-      <SideBar myFilter={filterFilms}></SideBar>
+      <Container fluid>
+        <Header />
+
+        <Row>
+          <Col md={3}>
+            <SideBar myFilter={filterFilms} />
+          </Col>
+
+          <Col md={9}>
+            <FormFilm myfilm={visibleFilms}></FormFilm>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
