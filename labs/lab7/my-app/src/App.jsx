@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import FormFilm from "./components/FormFilm";
 import { Container, Col, Row } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import { Prev } from "react-bootstrap/esm/PageItem";
 
 function App() {
   useEffect(() => {
@@ -20,6 +22,7 @@ function App() {
 
   const [allFilms, setAllFilms] = useState([]);
   const [visibleFilms, setVisibleFilms] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   const filterFilms = (filterName) => {
     if (filterName == "all") {
@@ -28,7 +31,20 @@ function App() {
     if (filterName == "fav") {
       setVisibleFilms(allFilms.filter((f) => f.favorite === 1));
     }
+    if (filterName == "rate") {
+      setVisibleFilms(allFilms.filter((f) => f.rate === 5));
+    }
   };
+
+  const addFilm = (filmFrominput) => {
+    const filmWithId = {
+      ...filmFrominput,
+      id: allFilms.length + 1,
+    };
+    setAllFilms((Prev) => [...Prev, filmWithId]);
+    setVisibleFilms((prev) => [...prev, filmWithId]);
+  };
+
   return (
     <>
       <Container fluid>
@@ -41,6 +57,10 @@ function App() {
 
           <Col md={9}>
             <FormFilm myfilm={visibleFilms}></FormFilm>
+            {!showForm && <Button onClick={() => setShowForm(true)}></Button>}
+            {showForm && (
+              <FormFilm newFilm={addFilm} setShowForm={setShowForm}></FormFilm>
+            )}
           </Col>
         </Row>
       </Container>
