@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-import "./App.css";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import FormFilm from "./components/FormFilm";
-import { Container, Col, Row } from "react-bootstrap";
-import { Button, Table } from "react-bootstrap";
-import { Prev } from "react-bootstrap/esm/PageItem";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 function App() {
+  const [allFilms, setAllFilms] = useState([]);
+  const [visibleFilms, setVisibleFilms] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
     const data = [
       { id: 1, title: "Test Film 1", favorite: 1, watchdate: "2025", rate: 4 },
@@ -20,51 +18,53 @@ function App() {
     setVisibleFilms(data);
   }, []);
 
-  const [allFilms, setAllFilms] = useState([]);
-  const [visibleFilms, setVisibleFilms] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-
   const filterFilms = (filterName) => {
-    if (filterName == "all") {
+    if (filterName === "all") {
       setVisibleFilms(allFilms);
-    }
-    if (filterName == "fav") {
+    } else if (filterName === "fav") {
       setVisibleFilms(allFilms.filter((f) => f.favorite === 1));
-    }
-    if (filterName == "rate") {
+    } else if (filterName === "rate") {
       setVisibleFilms(allFilms.filter((f) => f.rate === 5));
     }
   };
 
-  const addFilm = (filmFrominput) => {
+  const addFilm = (filmFromInput) => {
     const filmWithId = {
-      ...filmFrominput,
+      ...filmFromInput,
       id: allFilms.length + 1,
     };
-    setAllFilms((Prev) => [...Prev, filmWithId]);
+
+    setAllFilms((prev) => [...prev, filmWithId]);
     setVisibleFilms((prev) => [...prev, filmWithId]);
   };
 
   return (
-    <>
-      <Container fluid>
-        <Header />
+    <Container fluid>
+      <Header />
 
-        <Row>
-          <Col md={3}>
-            <SideBar myFilter={filterFilms} />
-          </Col>
+      <Row>
+        {/* Sidebar */}
+        <Col md={3}>
+          <SideBar myFilter={filterFilms} />
+        </Col>
 
-          <Col md={9}>
-            <FormFilm myfilm={visibleFilms}></FormFilm>
-            {!showForm && <Button onClick={() => setShowForm(true)}></Button>}
-            {showForm && (
-              <FormFilm newFilm={addFilm} setShowForm={setShowForm}></FormFilm>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    </>
+        {/* Main */}
+        <Col md={9}>
+          {/* دکمه + */}
+          {!showForm && <Button onClick={() => setShowForm(true)}>+</Button>}
+
+          {/* فرم */}
+          {showForm && <FormFilm addFilm={addFilm} setShowForm={setShowForm} />}
+
+          {/* نمایش لیست */}
+          {visibleFilms.map((f) => (
+            <div key={f.id}>
+              {f.title} | {f.watchdate} | {f.rate}
+            </div>
+          ))}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

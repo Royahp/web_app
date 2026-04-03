@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function FormFilm(props) {
   const [film, setFilm] = useState({
@@ -8,51 +8,51 @@ function FormFilm(props) {
     watchdate: "",
     rate: 0,
   });
+
   return (
     <>
-      <Table>
-        <thead>
-          <tr>
-            <td>title</td>
-            <td>favorite</td>
-            <td>date</td>
-            <td>rate</td>
-          </tr>
-        </thead>
-        <tbody>
-          {props.myfilm.map((f) => (
-            <tr key={f.id}>
-              <td>{f.title}</td>
-              <td>{f.favorite}</td>
-              <td>{f.watchdate}</td>
-              <td>{f.rate}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      {/* TITLE */}
       <input
         placeholder="Title"
         value={film.title}
         onChange={(e) => setFilm({ ...film, title: e.target.value })}
-      ></input>
+      />
+
+      {/* FAVORITE */}
       <input
-        placeholder="Favorite"
-        value={film.favorite}
-        onChange={(e) => setFilm({ ...film, favorite: e.target.favorite })}
-      ></input>
+        type="checkbox"
+        checked={film.favorite}
+        onChange={(e) => setFilm({ ...film, favorite: e.target.checked })}
+      />
+
+      {/* DATE */}
       <input
-        placeholder="watchDate"
+        type="date"
         value={film.watchdate}
-        onChange={(e) => setFilm({ ...film, watchdate: e.target.watchDate })}
-      ></input>
+        onChange={(e) => setFilm({ ...film, watchdate: e.target.value })}
+      />
+
+      {/* RATE */}
       <input
-        placeholder="Rating"
+        type="number"
+        min={0}
+        max={5}
         value={film.rate}
-        onChange={(e) => setFilm({ ...film, rate: e.target.rate })}
-      ></input>
+        onChange={(e) => setFilm({ ...film, rate: Number(e.target.value) })}
+      />
+
+      {/* BUTTON */}
       <Button
         onClick={() => {
           props.addFilm(film);
+
+          setFilm({
+            title: "",
+            favorite: false,
+            watchdate: "",
+            rate: 0,
+          });
+
           props.setShowForm(false);
         }}
       >
@@ -61,4 +61,5 @@ function FormFilm(props) {
     </>
   );
 }
+
 export default FormFilm;
