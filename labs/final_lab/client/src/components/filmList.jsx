@@ -2,12 +2,14 @@ function FilmList(props) {
   return (
     <>
       <table>
-        <tr>
-          <th>Title</th>
-          <th>Favorite</th>
-          <th>watch Date </th>
-          <th>Rate</th>
-        </tr>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Favorite</th>
+            <th>watch Date </th>
+            <th>Rate</th>
+          </tr>
+        </thead>
         <tbody>
           {props.films.map((f) => (
             <tr key={f.id}>
